@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CarTest {
 
-    private Car chunSik, ryan, neo, con, muzi, apeach, jayG, frodo, tube;
+    private Car chunSik, ryan, neo, con, muzi, apeach, jayG, frodo,tube;
 
     @BeforeEach
     void setup() {
