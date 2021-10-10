@@ -4,7 +4,6 @@ public class Car {
 
     private String name;
     private int curStep;
-    private int randomNumber;
 
     public Car(String name) {
         this.name = name;

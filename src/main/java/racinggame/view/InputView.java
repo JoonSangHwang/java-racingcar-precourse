@@ -9,7 +9,7 @@ public class InputView {
 
         String[] names = Console.readLine().split(",");
 
-        if (!ValidationUtils.isValidNaming(names)) {
+        if (!ValidationUtils.isValidNames(names)) {
             throw new IllegalArgumentException("[ERROR] 입력이 잘 못 되었습니다.");
         }
 
@@ -17,7 +17,6 @@ public class InputView {
     }
 
     public static int inputRacingRoundCnt() {
-
         System.out.println("시도할 회수는 몇회인가요?");
         return Integer.parseInt(Console.readLine());
     }

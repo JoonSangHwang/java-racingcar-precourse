@@ -5,25 +5,19 @@ public class ValidationUtils {
     public static final int MIN_NO = 1;
     public static final int MAX_NO = 5;
 
-    public static boolean isValidNaming(String[] names) {
-        int aimCnt = names.length;
+    public static boolean isValidNames(String[] names) {
         int curCnt = 0;
-
         for (String name : names) {
-            curCnt += validCount(name);
+            curCnt = isValidName(name)
+                    ? curCnt++
+                    : curCnt;
         }
 
-        return curCnt == aimCnt;
+        // 문자열 names 의 길이만큼 검증이 통과해야 true
+        return curCnt == (names.length);
     }
 
-    private static int validCount(String name) {
-        if (isCorrectNaming(name))
-            return 1;
-
-        return 0;
-    }
-
-    private static boolean isCorrectNaming(String name) {
+    private static boolean isValidName(String name) {
         return  !"".equals(name)
                 && !(name == null)
                 && name.length() >= MIN_NO
