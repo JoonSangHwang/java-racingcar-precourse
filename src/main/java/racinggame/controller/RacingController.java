@@ -12,13 +12,14 @@ import java.util.List;
 public class RacingController {
 
     private List<Car> racingPlayers;
+    private int winnerStep = 0;
 
     public void game() {
         gameReadey();
 
-        int winnerNum = gameStart();
+        gameStart();
 
-        gameEnd(winnerNum);
+        gameEnd();
     }
 
     private void gameReadey() {
@@ -30,33 +31,30 @@ public class RacingController {
             return;
         }
 
-        Race racing = new Race(carName);
-        racingPlayers = racing.getRacingPlayers();
+        racingPlayers = new Race(carName).getRacingPlayers();
     }
 
-    private int gameStart() {
+    private void gameStart() {
         int round = InputView.inputRacingRoundCnt();
-        int winnerNum = 0;
 
         while (round-- > 0) {
-
-            for (Car racingPlayer : racingPlayers) {
-                racingPlayer.play(Randoms.pickNumberInRange(1,9));
-
-                OutputView.printRacingContent(racingPlayer);
-
-                if (winnerNum < racingPlayer.getCurStep())
-                    winnerNum = racingPlayer.getCurStep();
-
-            }
-            System.out.println();
+            inProgress();
         }
-
-        return winnerNum;
     }
 
-    private void gameEnd(int winnerNum) {
-        PlayResult.winnerCheck(racingPlayers, winnerNum);
+    private void inProgress() {
+        for (Car racingPlayer : racingPlayers) {
+            racingPlayer.play(Randoms.pickNumberInRange(1,9));
+
+            OutputView.printRacingContent(racingPlayer);
+
+            winnerStep = Math.max(winnerStep, racingPlayer.getCurStep());
+        }
+        System.out.println();
+    }
+
+    private void gameEnd() {
+        PlayResult.winnerCheck(racingPlayers, winnerStep);
         OutputView.printWinner();
     }
 }
